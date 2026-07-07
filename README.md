@@ -1,15 +1,24 @@
-# Setup
+# ChatGPT Clone
 
-0. Clone the repository
-git clone 
+Vite + React frontend for the project.
+
+Repository: https://github.com/Veer376/pivot-chatgpt-clone.git
+
+## Clone
+
+```bash
+git clone https://github.com/Veer376/pivot-chatgpt-clone.git
 cd chatgpt-clone
+```
 
-1. Install dependencies
+## Install
+
 ```bash
 npm install
 ```
 
-2. Start the development server
-```bash 
-npm run dev 
+## Run
+
+```bash
+npm run dev
 ```
