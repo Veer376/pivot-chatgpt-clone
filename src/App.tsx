@@ -1,13 +1,24 @@
 import { useState } from 'react'
-import './App.css'
+import Composer from './components/composer.tsx'
+import MessagesContainer from './components/MessagesContainer.tsx'
+import useChat from './hooks/useChat.tsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const {
+        messages,
+        input,
+        setInput,
+        loading,
+        addMessage,
+        model,
+        setModel
+    } = useChat();
 
   return (
     <>
-      <div className="bg-amber-50 h-10">
-        Hello World
+      <div className="h-dvh bg-slate-50 flex flex-col">
+        <MessagesContainer messages={messages} isLoading={loading} />
+        <Composer onChange={setInput} value={input} onSend={addMessage} model={model} setModel={setModel} />
       </div>
     </>
   )

@@ -5,6 +5,7 @@ const useChat = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState("");
     const [loading, setIsLoading] = useState(false);
+    const [model, setModel] = useState("llama-3.1-8b-instant");
 
     const addMessage = async (message: string) => {
 
@@ -22,6 +23,8 @@ const useChat = () => {
 
             setIsLoading(true);
 
+            setInput("");
+
             const api_response = await fetch("http://localhost:3000/chat", {
                 method: "POST",
                 headers: {
@@ -29,7 +32,8 @@ const useChat = () => {
                 },
                 body: JSON.stringify(
                     { 
-                        messages: updatedMessages 
+                        messages: updatedMessages,
+                        model: model
                     }
                 ),
             })
@@ -43,7 +47,7 @@ const useChat = () => {
             const assistantMessage: Message = {
                 id: crypto.randomUUID(),
                 role: "assistant",
-                content: response.message
+                content: response.response
             }
 
             setMessages([...updatedMessages, assistantMessage]);
@@ -64,7 +68,11 @@ const useChat = () => {
         input,
         setInput,
         loading,
-        addMessage
+        addMessage,
+        model,
+        setModel
     }
 
 }
+
+export default useChat;
