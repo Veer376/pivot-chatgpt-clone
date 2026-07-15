@@ -1,4 +1,5 @@
 import type { Message } from "../types";
+import { useEffect } from "react";
 
 interface MessagesContainerProps {
     messages: Message[];
@@ -6,6 +7,14 @@ interface MessagesContainerProps {
 }
 
 export default function MessagesContainer( { messages, isLoading }: MessagesContainerProps ) {
+
+    useEffect(() => {
+        const messagesEnd = document.getElementById("messages-end");
+
+        if (messagesEnd) {
+            messagesEnd.scrollIntoView( { behavior: "smooth" } );
+        }
+    }, [messages]);
 
     return (
         <div className="flex-1 overflow-y-auto p-4">
@@ -26,6 +35,8 @@ export default function MessagesContainer( { messages, isLoading }: MessagesCont
             }
 
             { isLoading && <div className="flex justify-start p-4 text-black"> Loading... </div> }
+
+            <div id="messages-end" />
         </div>
     )
 }
